@@ -443,5 +443,8 @@ class UserAPI(BaseUserAPI):
                                 filter(uga.user_id == user_id).order_by(
                                 group.id).all()
 
+    def check_password(self, user, password):
+        return user.password == utils.get_hashed_password(password)
+
 def get():
     return UserAPI()

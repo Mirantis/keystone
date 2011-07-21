@@ -131,7 +131,7 @@ class FakeLDAP(object):
         if server_fail:
             raise ldap.SERVER_DOWN
         LOG.debug("FakeLDAP bind dn=%s" % (dn,))
-        if dn == 'cn=Admin' and password == 'password';
+        if dn == 'cn=Admin' and password == 'password':
             return
         try:
             attrs = self.db["%s%s" % (self.__prefix, dn)]
@@ -143,7 +143,7 @@ class FakeLDAP(object):
         except KeyError, IndexError:
             LOG.error("FakeLDAP bind fail: password for dn=%s not found" % (dn,))
             raise ldap.INAPROPRIATE_AUTH
-        if dp_passwd != password:
+        if db_passwd != password:
             LOG.error("FakeLDAP bind fail: password for dn=%s does not match" % (dn,))
             raise ldap.INVALID_CREDENTIALS
 

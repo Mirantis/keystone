@@ -16,10 +16,14 @@ class API(object):
         self.user = UserAPI(self, options)
         self.role = RoleAPI(self, options)
     
-    def get_connection(self):
+    def get_connection(self, user=None, password=None):
         if self.LDAP_URL.startswith('fake://'):
             conn = fakeldap.initialize(self.LDAP_URL)
         else:
             conn = ldap.initialize(self.LDAP_URL)
-        conn.simple_bind_s(self.LDAP_USER, self.LDAP_PASSWORD)
+        if user is None:
+            user = self.LDAP_USER
+        if password is None:
+            password = self.LDAP_PASSWORD
+        conn.simple_bind_s(user, password)
         return conn

@@ -53,7 +53,7 @@ class IdentityService(object):
 
         if not duser.enabled:
             raise fault.UserDisabledFault("Your account has been disabled")
-        if duser.password != utils.get_hashed_password(credentials.password):
+        if not api.user.check_password(duser, credentials.password):
             raise fault.UnauthorizedFault("Unauthorized")
         
         #
