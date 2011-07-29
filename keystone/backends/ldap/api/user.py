@@ -13,7 +13,11 @@ class UserAPI(BaseLdapAPI, BaseUserAPI):
     options_name = 'user_tree_dn'
     object_class = 'keystoneUser'
     model = models.User
-    attribute_mapping = { 'password': 'userPassword', 'email': 'mail' }
+    attribute_mapping = {
+        'password': 'userPassword',
+        'email': 'mail',
+        'enabled': 'keystoneEnabled',
+    }
     attribute_ignore = ['tenant_id']
     
     def _ldap_res_to_model(self, res):
